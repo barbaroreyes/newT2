@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import  robots from './Componnt/robots';
 import CardList from './Componnt/CarList';
+import 'tachyons';
 
 
 ReactDOM.render(
