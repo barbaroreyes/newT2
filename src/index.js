@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Card from './Componnt/Card';
-import robots from './Componnt/robots';
+import  robots from './Componnt/robots';
+import CardList from './Componnt/CarList';
 
 
 ReactDOM.render(
   <React.StrictMode>
-   <Card id={robots[0].id} name ={robots[0].name} email={robots[0].e}/>
+   <CardList robots = {robots}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
