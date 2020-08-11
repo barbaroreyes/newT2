@@ -14,7 +14,13 @@ class App extends Component {
         this.setState({SeachField:event.target.value})
     }
     componentDidMount(){
-        this.setState({robots:robots})
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(Response =>{
+            return  Response.json()
+        } )
+        .then(user =>{
+            this.setState({robots:robots})
+        } )    
     }
     render(){
         const filterR = this.state.robots.filter(robots => {
