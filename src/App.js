@@ -6,19 +6,22 @@ class App extends Component {
     constructor(){
         super()
         this.state ={
-            robots : robots,
+            robots : [],
             SeachField: ''
         }
     }
     onSearChange = (event) =>{
         this.setState({SeachField:event.target.value})
     }
+    componentDidMount(){
+        this.setState({robots:robots})
+    }
     render(){
         const filterR = this.state.robots.filter(robots => {
             return robots.name.toLowerCase().includes(this.state.SeachField.toLowerCase())
         })
         return (<div className= 'tc'>
-                <h1>Robots-Friends</h1>
+                <h1 className ='f2'>Robots-Friends</h1>
                 <SearchBox searChange = {this.onSearChange}/>
                 <CardList robots = {filterR}/>
             </div>)
