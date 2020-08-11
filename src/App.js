@@ -1,6 +1,5 @@
 import React ,{Component} from 'react'
 import CardList from './Componnt/CarList'
-import  robots from './Componnt/robots';
 import SearchBox from './Componnt/SearchBox';
 class App extends Component {
     constructor(){
@@ -18,8 +17,8 @@ class App extends Component {
         .then(Response =>{
             return  Response.json()
         } )
-        .then(user =>{
-            this.setState({robots:robots})
+        .then(users =>{
+            this.setState({robots:users})
         } )    
     }
     render(){
