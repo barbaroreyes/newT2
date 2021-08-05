@@ -1,35 +1,43 @@
-import React ,{Component} from 'react'
-import CardList from './Componnt/CarList'
-import SearchBox from './Componnt/SearchBox';
-class App extends Component {
-    constructor(){
-        super()
-        this.state ={
-            robots : [],
-            SeachField: ''
+import React,{useState,useEffect} from 'react'
+import Card from './Componnt/Card'
+const App = () => {
+    const [users,setUsers] = useState([])
+    const [searchName,setSearchName] = useState('')
+    useEffect( () =>{
+        fetchUsers()
+       
+       },[])
+
+    const fetchUsers = async() =>{
+        try {
+            await fetch('https://jsonplaceholder.typicode.com/users')
+            .then(resp => resp.json())
+            .then(setUsers)
+          } catch (error) {
+            
+          }
+    }
+    console.log('uses',users)
+  return (
+    <div className ='list tc'>
+     <input type='text' placeholder='findd ypur name '
+     onChange= {(e) => setSearchName(e.target.value)}
+     />
+     {users.filter(item => {
+        if(searchName ===''){return item }
+        else if (item.name.toLowerCase().includes(searchName.toLowerCase())) {
+          return item
         }
-    }
-    onSearChange = (event) =>{
-        this.setState({SeachField:event.target.value})
-    }
-    componentDidMount(){
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then(Response =>{
-            return  Response.json()
-        } )
-        .then(users =>{
-            this.setState({robots:users})
-        } )    
-    }
-    render(){
-        const filterR = this.state.robots.filter(robots => {
-            return robots.name.toLowerCase().includes(this.state.SeachField.toLowerCase())
-        })
-        return (<div className= 'tc'>
-                <h1 className ='f2'>Robots-Friends</h1>
-                <SearchBox searChange = {this.onSearChange}/>
-                <CardList robots = {filterR}/>
-            </div>)
-    }
+     }).map((item,i)=>{
+       return  (< Card 
+        key={i}
+        name={item.name}
+        email={item.email}
+        id={item.id}
+        />)
+     })}
+    </div>
+  )
 }
-export default  App
+
+export default App
